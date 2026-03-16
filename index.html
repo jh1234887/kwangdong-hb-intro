@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>광동헬스바이오 AI 활동 안내</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    button { font-family: inherit; cursor: pointer; }
+    a { text-decoration: none; }
+
+    :root {
+      --bg:            #0f0f10;
+      --surface:       #17171a;
+      --border:        #2a2a30;
+      --divider:       #1e1e22;
+      --text-primary:  #e2e2e4;
+      --text-body:     #c4c4cc;
+      --text-muted:    #6b6b72;
+      --accent:        #7c6ee8;
+      --accent-text:   #c4b5fd;
+      --accent-bg:     #1e1a2e;
+      --accent-border: #4b3fa0;
+      --success:       #4ade80;
+      --warning:       #fbbf24;
+      --danger:        #f87171;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-body);
+      font-family: 'Apple SD Gothic Neo', 'Pretendard', 'Malgun Gothic', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Page Header ── */
+    .page-header {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 40px 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .page-header-left {}
+    .page-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .page-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .page-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .page-header-badge {
+      flex-shrink: 0;
+      background: var(--accent-bg);
+      border: 0.5px solid var(--accent-border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: var(--accent-text);
+      white-space: nowrap;
+    }
+
+    /* ── Tab Nav ── */
+    .tab-nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .tab-nav {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      gap: 2px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 400;
+      padding: 11px 14px;
+      border-bottom: 1.5px solid transparent;
+      transition: color 0.15s;
+      letter-spacing: -0.01em;
+    }
+    .tab-btn:hover { color: var(--text-body); }
+    .tab-btn.active {
+      color: var(--accent-text);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── Main ── */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── Spacing helpers ── */
+    .gap-20 > * + * { margin-top: 20px; }
+    .gap-12 > * + * { margin-top: 12px; }
+
+    /* ── Section label ── */
+    .sec-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      transition: border-color 0.15s;
+    }
+    .card:hover { border-color: var(--accent-border); }
+    .card-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    /* ── Divider (no <hr>) ── */
+    .div-line { border-top: 0.5px solid var(--divider); }
+
+    /* ── 2-column layout ── */
+    .cols-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    @media (max-width: 680px) { .cols-2 { grid-template-columns: 1fr; } }
+
+    /* ── Feature Grid (4-col) ── */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 680px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .feat-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      transition: border-color 0.15s;
+    }
+    .feat-card:hover { border-color: var(--accent-border); }
+    .feat-icon { font-size: 20px; margin-bottom: 8px; }
+    .feat-title { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+    .feat-desc  { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── Use Case List ── */
+    .uc-list { list-style: none; }
+    .uc-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-top: 0.5px solid var(--divider);
+    }
+    .uc-item:first-child { border-top: none; padding-top: 0; }
+    .uc-title { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 3px; }
+    .uc-desc  { font-size: 12px; color: var(--text-muted); }
+
+    /* ── Badge ── */
+    .badge {
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 5px;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+    .b-acc  { background: var(--accent-bg);  color: var(--accent-text); border: 0.5px solid var(--accent-border); }
+    .b-med  { background: #1e1a10; color: var(--warning); border: 0.5px solid #3a3010; }
+    .b-low  { background: #14201a; color: var(--success); border: 0.5px solid #1a3a24; }
+    .b-urg  { background: #2d1515; color: var(--danger);  border: 0.5px solid #4a1a1a; }
+
+    /* ── YouTube thumbnail click-to-play ── */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      background: var(--surface);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 0.5px solid var(--border);
+      cursor: pointer;
+    }
+    .video-wrap iframe,
+    .video-wrap img,
+    .video-wrap .play-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+    .video-wrap img {
+      object-fit: cover;
+      display: block;
+    }
+    .play-overlay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      transition: background 0.2s;
+    }
+    .video-wrap:hover .play-overlay { background: rgba(0,0,0,0.20); }
+    .play-btn {
+      width: 56px; height: 56px;
+      background: rgba(124,110,232,0.88);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .play-btn svg { width: 22px; height: 22px; fill: white; margin-left: 3px; }
+    .video-wrap iframe { border: none; }
+
+    /* ── Activity grid ── */
+    .act-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 680px) { .act-grid { grid-template-columns: 1fr; } }
+
+    .act-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      transition: border-color 0.15s;
+    }
+    .act-card:hover { border-color: var(--accent-border); }
+    .ac-icon  { font-size: 20px; margin-bottom: 8px; }
+    .ac-title { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+    .ac-desc  { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── Timeline ── */
+    .timeline { position: relative; padding-left: 22px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 5px; top: 8px; bottom: 0;
+      width: 0.5px;
+      background: var(--border);
+    }
+    .tl-item { position: relative; padding-bottom: 16px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -19px; top: 7px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .tl-item.current::before { background: var(--success); }
+    .tl-date    { font-size: 11px; font-weight: 500; color: var(--accent-text); letter-spacing: 0.03em; margin-bottom: 2px; }
+    .tl-content { font-size: 13px; color: var(--text-body); }
+
+    /* ── Achievements list ── */
+    .ach-list { list-style: none; }
+    .ach-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-top: 0.5px solid var(--divider);
+    }
+    .ach-item:first-child { border-top: none; padding-top: 0; }
+    .ach-dot {
+      flex-shrink: 0;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 7px;
+    }
+    .ach-team  { font-size: 11px; font-weight: 500; color: var(--accent-text); margin-bottom: 2px; }
+    .ach-title { font-size: 13px; color: var(--text-body); }
+
+    /* ── Join box ── */
+    .join-box {
+      background: var(--accent-bg);
+      border: 0.5px solid var(--accent-border);
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+    .join-title { font-size: 14px; font-weight: 500; color: var(--accent-text); letter-spacing: -0.02em; margin-bottom: 8px; }
+    .join-body  { font-size: 13px; color: var(--text-body); line-height: 1.75; }
+    .join-body strong { color: var(--text-primary); font-weight: 500; }
+
+    /* ── Tool groups ── */
+    .tool-group { padding: 16px 0; border-top: 0.5px solid var(--divider); }
+    .tool-group:first-child { border-top: none; padding-top: 0; }
+    .tg-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 10px; }
+    .tg-row   { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .tool-tag {
+      background: transparent;
+      border: 0.5px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 13px;
+      color: var(--text-body);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .tool-tag:hover { border-color: var(--accent-border); color: var(--accent-text); }
+    .tg-note { font-size: 12px; color: var(--text-muted); }
+
+    /* ── Contact ── */
+    .contact-section {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 0.5px solid var(--border);
+    }
+    .contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+    .contact-name  { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+    .contact-email { font-size: 13px; color: var(--accent-text); }
+    .contact-email:hover { text-decoration: underline; }
+    .contact-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .contact-pill {
+      font-size: 11px;
+      color: var(--text-muted);
+      border: 0.5px solid var(--border);
+      border-radius: 5px;
+      padding: 2px 8px;
+    }
+
+    @media (max-width: 680px) {
+      .page-header { padding: 28px 20px 20px; flex-direction: column; align-items: flex-start; }
+      .page-header-badge { display: none; }
+      .main { padding: 24px 20px 60px; }
+      .tab-nav { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-left">
+    <div class="page-label">AI Center · 광동헬스바이오 · 2026.03</div>
+    <div class="page-title">AI Crew 활동 소개 및 업무 자동화 도구(MISO) 안내</div>
+    <div class="page-desc">광동제약 AI Crew 커뮤니티와 MISO 플랫폼을 소개합니다.</div>
+  </div>
+  <div class="page-header-badge">AI Center 공유자료</div>
+</div>
+
+<!-- Tab Nav -->
+<div class="tab-nav-wrap">
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('miso',this)">MISO</button>
+    <button class="tab-btn" onclick="switchTab('crew',this)">AI Crew</button>
+    <button class="tab-btn" onclick="switchTab('tools',this)">AI 도구</button>
+  </nav>
+</div>
+
+<div class="main">
+
+  <!-- ════════ MISO ════════ -->
+  <div id="panel-miso" class="panel active gap-20">
+
+    <!-- 소개 영상 -->
+    <div>
+      <div class="sec-label">소개 영상</div>
+      <div class="video-wrap" id="yt-wrap" onclick="loadVideo()">
+        <img
+          src="https://img.youtube.com/vi/BX4_raNiCw0/maxresdefault.jpg"
+          alt="MISO 소개 영상 썸네일"
+          onerror="this.src='https://img.youtube.com/vi/BX4_raNiCw0/hqdefault.jpg'"
+        />
+        <div class="play-overlay">
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 특장점 -->
+    <div>
+      <div class="sec-label">왜 MISO인가요</div>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="feat-icon">🇰🇷</div>
+          <div class="feat-title">사용자 친화적</div>
+          <div class="feat-desc">한국어 최적화 UI, 비전문가도 쉽게 적응</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🔗</div>
+          <div class="feat-title">그룹웨어 연동</div>
+          <div class="feat-desc">사내 시스템 직접 연동, 자동화 결과 메일 발송</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🔒</div>
+          <div class="feat-title">보안 최적화</div>
+          <div class="feat-desc">기업용 DRM 문서도 안전하게 학습·관리</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🧩</div>
+          <div class="feat-title">다양한 기능</div>
+          <div class="feat-desc">OCR · 동영상 생성 · 대용량 문서 Parser</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 활용 사례 -->
+    <div class="card">
+      <div class="card-title">광동 내 실제 활용 사례</div>
+      <ul class="uc-list">
+        <li class="uc-item">
+          <span class="badge b-acc">행정</span>
+          <div>
+            <div class="uc-title">식약처 허가/취소 자동 리포팅</div>
+            <div class="uc-desc">의약품 허가·취소 목록을 매일 자동 수집(스크래핑)해 팀원 메일로 발송</div>
+          </div>
+        </li>
+        <li class="uc-item">
+          <span class="badge b-med">품질</span>
+          <div>
+            <div class="uc-title">품질위험관리 평가시트 자동화</div>
+            <div class="uc-desc">변경 실행 항목(Action Item) 관리 등 반복 문서 업무 보조</div>
+          </div>
+        </li>
+        <li class="uc-item">
+          <span class="badge b-low">챗봇</span>
+          <div>
+            <div class="uc-title">EDMS 전용 챗봇</div>
+            <div class="uc-desc">방대한 EDMS 문서를 학습시켜 채팅만으로 규정·데이터 즉시 검색</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div><!-- /panel-miso -->
+
+
+  <!-- ════════ AI CREW ════════ -->
+  <div id="panel-crew" class="panel gap-20">
+
+    <!-- AI Crew 란? -->
+    <div class="card">
+      <div class="card-title">AI Crew란?</div>
+      <p style="font-size:13px;color:var(--text-body);line-height:1.75;">
+        광동제약 내부에서 AI 활용에 관심 있는 임직원이 모인 <strong style="color:var(--text-primary);font-weight:500;">자발적 학습·실행 커뮤니티</strong>입니다.<br>
+        단순 교육 수강을 넘어 AI를 직접 만들고 실무에 적용하는 것을 목표로 합니다.
+      </p>
+    </div>
+
+    <!-- 주요 활동 -->
+    <div>
+      <div class="sec-label">주요 활동</div>
+      <div class="act-grid">
+        <div class="act-card">
+          <div class="ac-icon">🛠️</div>
+          <div class="ac-title">월 1회 핸즈온 실습</div>
+          <div class="ac-desc">이론보다 실습 중심. 매달 직접 도구를 써서 결과물을 만듭니다.</div>
+        </div>
+        <div class="act-card">
+          <div class="ac-icon">📚</div>
+          <div class="ac-title">다양한 AI 도구 학습</div>
+          <div class="ac-desc">n8n · RAG · 바이브 코딩 · MISO 등 실무 즉시 투입 가능한 기술 체계 학습</div>
+        </div>
+        <div class="act-card">
+          <div class="ac-icon">🤝</div>
+          <div class="ac-title">팀간 네트워킹</div>
+          <div class="ac-desc">각 팀 AI 활용 현황 및 꿀팁 공유, 부서를 넘어 협업 포인트 발굴</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 활동 내역 + 성과 (2컬럼) -->
+    <div class="cols-2">
+
+      <!-- 활동 타임라인 -->
+      <div class="card">
+        <div class="card-title">지금까지의 활동</div>
+        <div class="timeline gap-12">
+          <div class="tl-item">
+            <div class="tl-date">2025년 8월</div>
+            <div class="tl-content">n8n 세팅 및 워크플로우 실습</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2025년 9월</div>
+            <div class="tl-content">RAG 기초 및 Pinecone을 활용한 챗봇 실습</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2025년 10월</div>
+            <div class="tl-content">AI 브라우저 실습 및 사례 공유</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2025년 11월</div>
+            <div class="tl-content">기초 및 고급 바이브 코딩</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2026년 1월</div>
+            <div class="tl-content">디자인 씽킹을 통한 진짜 Task 정의</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2026년 2월</div>
+            <div class="tl-content">MISO 소개 및 기초 교육</div>
+          </div>
+          <div class="tl-item current">
+            <div class="tl-date">2026년 3월 · 현재</div>
+            <div class="tl-content">워크플로우 설계 (MISO 활용 실습)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 성과 -->
+      <div class="card">
+        <div class="card-title">지금까지의 성과</div>
+        <ul class="ach-list">
+          <li class="ach-item">
+            <div class="ach-dot"></div>
+            <div>
+              <div class="ach-team">RND 사업추진팀</div>
+              <div class="ach-title">식품안전나라 원료 정보 크롤링 → 데이터 자동 적재</div>
+            </div>
+          </li>
+          <li class="ach-item">
+            <div class="ach-dot"></div>
+            <div>
+              <div class="ach-team">언론팀</div>
+              <div class="ach-title">뉴스 기사 수집 DB 기반 일일 뉴스 클리핑</div>
+            </div>
+          </li>
+          <li class="ach-item">
+            <div class="ach-dot"></div>
+            <div>
+              <div class="ach-team">공통</div>
+              <div class="ach-title">AI 브라우저를 이용한 그룹웨어 업무 자동화</div>
+            </div>
+          </li>
+          <li class="ach-item">
+            <div class="ach-dot"></div>
+            <div>
+              <div class="ach-team">GMP공장 DataIntegrity팀</div>
+              <div class="ach-title">설비 계정 관리 시스템 구축</div>
+            </div>
+          </li>
+          <li class="ach-item">
+            <div class="ach-dot"></div>
+            <div>
+              <div class="ach-team">식품환경기술팀</div>
+              <div class="ach-title">안전작업허가서 작성 시스템</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- /cols-2 -->
+
+    <!-- 가입 안내 -->
+    <div class="join-box">
+      <div class="join-title">AI Crew 가입 안내</div>
+      <div class="join-body">
+        본사는 <strong>반기 단위 기수제</strong>로 운영되며, 계열사는 기수제 없이 참여 가능합니다.<br>
+        헬스바이오 임직원분들은 AI 활용 역량을 키우고 싶으시면 언제든지 담당자에게 문의해 주세요.<br><br>
+        운영 담당자: <strong>AI Center 김규환님</strong>
+      </div>
+    </div>
+
+  </div><!-- /panel-crew -->
+
+
+  <!-- ════════ AI 도구 ════════ -->
+  <div id="panel-tools" class="panel">
+    <div class="card">
+      <div class="card-title">AI Center 주요 활용 도구</div>
+
+      <div class="tool-group">
+        <div class="tg-label">대화 및 기획</div>
+        <div class="tg-row">
+          <span class="tool-tag">Gemini</span>
+          <span class="tool-tag">Claude</span>
+          <span class="tool-tag">ChatGPT</span>
+          <span class="tool-tag">Genspark</span>
+        </div>
+        <div class="tg-note">정보 검색, 초안 작성, 아이디어 기획에 활용</div>
+      </div>
+
+      <div class="tool-group">
+        <div class="tg-label">개발 및 디자인</div>
+        <div class="tg-row">
+          <span class="tool-tag">Cursor</span>
+          <span class="tool-tag">v0</span>
+          <span class="tool-tag">Claude Code</span>
+        </div>
+        <div class="tg-note">코드 작성, 웹 화면 빠른 프로토타이핑에 활용</div>
+      </div>
+
+      <div class="tool-group">
+        <div class="tg-label">업무 대행 에이전트</div>
+        <div class="tg-row">
+          <span class="tool-tag">OpenClaw</span>
+        </div>
+        <div class="tg-note">사용자 지시에 따라 복잡한 웹 업무를 대신 수행하는 AI 에이전트</div>
+      </div>
+
+    </div>
+  </div><!-- /panel-tools -->
+
+
+  <!-- Contact (공통) -->
+  <div class="contact-section">
+    <div class="sec-label">문의하기</div>
+    <div class="contact-row">
+      <span class="contact-name">AI Center 김규환님</span>
+      <a class="contact-email" href="mailto:guhani@ekdp.com">guhani@ekdp.com</a>
+    </div>
+    <div class="contact-pills">
+      <span class="contact-pill">AI Crew 가입 상담</span>
+      <span class="contact-pill">MISO 계정 생성 및 활용</span>
+      <span class="contact-pill">워크플로우 제작 상담</span>
+      <span class="contact-pill">계열사 협업 문의</span>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function loadVideo() {
+    const wrap = document.getElementById('yt-wrap');
+    wrap.onclick = null;
+    wrap.style.cursor = 'default';
+    wrap.innerHTML =
+      '<iframe src="https://www.youtube.com/embed/BX4_raNiCw0?autoplay=1&rel=0"' +
+      ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"' +
+      ' allowfullscreen></iframe>';
+  }
+</script>
+</body>
+</html>
