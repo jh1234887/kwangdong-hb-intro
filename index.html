@@ -382,8 +382,8 @@
 <!-- Tab Nav -->
 <div class="tab-nav-wrap">
   <nav class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('miso',this)">MISO</button>
-    <button class="tab-btn" onclick="switchTab('crew',this)">AI Crew</button>
+    <button class="tab-btn active" onclick="switchTab('crew',this)">AI Crew</button>
+    <button class="tab-btn" onclick="switchTab('miso',this)">MISO</button>
     <button class="tab-btn" onclick="switchTab('tools',this)">AI 도구</button>
   </nav>
 </div>
@@ -391,7 +391,7 @@
 <div class="main">
 
   <!-- ════════ MISO ════════ -->
-  <div id="panel-miso" class="panel active gap-20">
+  <div id="panel-miso" class="panel gap-20">
 
     <!-- 소개 영상 -->
     <div>
@@ -469,7 +469,7 @@
 
 
   <!-- ════════ AI CREW ════════ -->
-  <div id="panel-crew" class="panel gap-20">
+  <div id="panel-crew" class="panel active gap-20">
 
     <!-- AI Crew 란? -->
     <div class="card">
@@ -540,43 +540,31 @@
         </div>
       </div>
 
-      <!-- 성과 -->
+      <!-- 성과 — tool별 -->
       <div class="card">
         <div class="card-title">지금까지의 성과</div>
         <ul class="ach-list">
           <li class="ach-item">
             <div class="ach-dot"></div>
             <div>
-              <div class="ach-team">RND 사업추진팀</div>
-              <div class="ach-title">식품안전나라 원료 정보 크롤링 → 데이터 자동 적재</div>
+              <div class="ach-team">n8n · 워크플로우 자동화</div>
+              <div class="ach-title">RND 사업추진팀 — 식품안전나라에서 원료 정보를 매일 자동 크롤링해 DB에 적재</div>
+              <div class="ach-title" style="margin-top:4px;">언론팀 — 뉴스 기사를 자동 수집하고, 수집된 DB 기반으로 일일 뉴스 클리핑 발송</div>
             </div>
           </li>
           <li class="ach-item">
             <div class="ach-dot"></div>
             <div>
-              <div class="ach-team">언론팀</div>
-              <div class="ach-title">뉴스 기사 수집 DB 기반 일일 뉴스 클리핑</div>
+              <div class="ach-team">AI 브라우저 · 업무 자동화</div>
+              <div class="ach-title">그룹웨어 내 반복 업무를 AI 브라우저가 직접 수행하도록 자동화</div>
             </div>
           </li>
           <li class="ach-item">
             <div class="ach-dot"></div>
             <div>
-              <div class="ach-team">공통</div>
-              <div class="ach-title">AI 브라우저를 이용한 그룹웨어 업무 자동화</div>
-            </div>
-          </li>
-          <li class="ach-item">
-            <div class="ach-dot"></div>
-            <div>
-              <div class="ach-team">GMP공장 DataIntegrity팀</div>
-              <div class="ach-title">설비 계정 관리 시스템 구축</div>
-            </div>
-          </li>
-          <li class="ach-item">
-            <div class="ach-dot"></div>
-            <div>
-              <div class="ach-team">식품환경기술팀</div>
-              <div class="ach-title">안전작업허가서 작성 시스템</div>
+              <div class="ach-team">v0 · 웹 시스템 빠른 구축</div>
+              <div class="ach-title">GMP공장 DataIntegrity팀 — 설비 계정 관리 시스템을 v0로 신속하게 개발</div>
+              <div class="ach-title" style="margin-top:4px;">식품환경기술팀 — 안전작업허가서 작성·관리 시스템 구축</div>
             </div>
           </li>
         </ul>
@@ -584,13 +572,40 @@
 
     </div><!-- /cols-2 -->
 
+    <!-- AI Center 지원 도구 -->
+    <div>
+      <div class="sec-label">AI Center 지원 도구</div>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="feat-icon">🧠</div>
+          <div class="feat-title">RAG / Pinecone</div>
+          <div class="feat-desc">사내 문서를 학습시켜 질문만으로 원하는 정보를 찾아주는 챗봇 구축</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🖥️</div>
+          <div class="feat-title">v0</div>
+          <div class="feat-desc">텍스트 한 줄로 웹 UI·시스템을 빠르게 프로토타이핑하는 AI 빌더</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🌐</div>
+          <div class="feat-title">AI 브라우저</div>
+          <div class="feat-desc">웹 브라우저 위에서 반복 업무를 AI가 직접 수행하는 자동화 에이전트</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🤖</div>
+          <div class="feat-title">MISO</div>
+          <div class="feat-desc">한국어 최적화 업무 자동화 플랫폼. 사내 문서를 활용한 챗봇부터 내가 만드는 워크플로우까지 직접 설계가능한 플랫폼</div>
+        </div>
+      </div>
+    </div>
+
     <!-- 가입 안내 -->
     <div class="join-box">
       <div class="join-title">AI Crew 가입 안내</div>
       <div class="join-body">
         본사는 <strong>반기 단위 기수제</strong>로 운영되며, 계열사는 기수제 없이 참여 가능합니다.<br>
         헬스바이오 임직원분들은 AI 활용 역량을 키우고 싶으시면 언제든지 담당자에게 문의해 주세요.<br><br>
-        운영 담당자: <strong>AI Center 김규환님</strong>
+        운영 담당자: <strong>AI Center Noah(김규환)</strong>
       </div>
     </div>
 
@@ -639,14 +654,8 @@
   <div class="contact-section">
     <div class="sec-label">문의하기</div>
     <div class="contact-row">
-      <span class="contact-name">AI Center 김규환님</span>
+      <span class="contact-name">AI Center Noah(김규환)</span>
       <a class="contact-email" href="mailto:guhani@ekdp.com">guhani@ekdp.com</a>
-    </div>
-    <div class="contact-pills">
-      <span class="contact-pill">AI Crew 가입 상담</span>
-      <span class="contact-pill">MISO 계정 생성 및 활용</span>
-      <span class="contact-pill">워크플로우 제작 상담</span>
-      <span class="contact-pill">계열사 협업 문의</span>
     </div>
   </div>
 
